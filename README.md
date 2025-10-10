@@ -14,7 +14,8 @@ Includes:
   
 - keybindings
 - monitor configuration
-- windows rules for apps I use
+- workspace configuration
+- windows rules
 - fish aliases
 - ssh-agent
 - sway-bg script to sync wallapaper+lockscreen+grub
