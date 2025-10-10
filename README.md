@@ -1,4 +1,6 @@
-These are my configurations to be used with Hyprland, installed using [ArchRiot](https://github.com/CyphrRiot/ArchRiot) ISO.
+### These are **my** configurations to be used with Hyprland, installed using [ArchRiot](https://github.com/CyphrRiot/ArchRiot) ISO.
+#### *This repository serves the only purpose of backing up my configurations to restore them in case something breaks.*
+Feel free to snoop around and/or ask questions, but keep in mind these are **my personal configs** for **my personal use**.
 
 Includes:
 - 4-monitor lockscreen (unfinished)
@@ -15,7 +17,8 @@ Includes:
 - keybindings
 - monitor configuration
 - workspace configuration
-- windows rules
+- windows rules (merged)
+- hyprwv plugins configuration
 - fish aliases
 - ssh-agent
 - sway-bg script to sync wallapaper+lockscreen+grub
