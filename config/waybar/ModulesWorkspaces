@@ -1,0 +1,279 @@
+/* ArchRiot Waybar Workspace Modules */
+/* Workspace configuration and styling modules */
+
+/* Generally, this is a potential expanding of choices for hyprland/workspace */
+// HYPRLAND WORKSPACES. CHOOSE as desired and place on waybar configs
+
+{
+// CIRCLES Style
+"hyprland/workspaces": {
+	"active-only": false,
+	"all-outputs": true,
+	"format": "{icon} ",
+	"show-special": false,
+	"on-click": "activate ",
+	"on-scroll-up": "hyprctl dispatch workspace e+1 ",
+	"on-scroll-down": "hyprctl dispatch workspace e-1 ",
+    "persistent-workspaces": {
+      "*": 3
+	},
+	"format-icons": {
+		"active": "⬤",
+		"default": "◉",
+		"empty": "○",
+	},
+},
+// ROMAN Numerals style
+"hyprland/workspaces#roman": {
+	"active-only": false,
+	"all-outputs": true,
+	"format": "{icon} ",
+	"show-special": false,
+	"on-click": "activate ",
+	"on-scroll-up": "hyprctl dispatch workspace e+1 ",
+	"on-scroll-down": "hyprctl dispatch workspace e-1 ",
+    "persistent-workspaces": {
+      "*": 3
+	},
+	"format-icons": {
+		"1": "I ",
+		"2": "II ",
+		"3": "III "
+	},
+},
+// PACMAN Style
+"hyprland/workspaces#pacman": {
+	"active-only": false,
+	"all-outputs": true,
+	"on-click": "activate ",
+	"on-scroll-up": "hyprctl dispatch workspace e+1 ",
+	"on-scroll-down": "hyprctl dispatch workspace e-1 ",
+	"show-special": false,
+    "persistent-workspaces": {
+      "*": 3
+	},
+	"max-length": 3,
+	"format": "{icon} ",
+	"format-icons": {
+            "active": "<span font='11'>󰮯 </span> ",
+            "empty": "<span font='8'> </span> ",
+            "default": "󰊠 ",
+	},
+},
+// Kanji / Japanese style
+"hyprland/workspaces#kanji": {
+	"disable-scroll": true,
+	"show-special": false,
+	"all-outputs": true,
+	"format": "{icon} ",
+    "persistent-workspaces": {
+      "*": 3
+	},
+	"format-icons": {
+		"1": "一 ",
+		"2": "二 ",
+		"3": "三 "
+	}
+},
+// for Camilla or Spanish
+"hyprland/workspaces#cam": {
+	"active-only":false,
+	"all-outputs": true,
+	"format": "{icon} ",
+	"show-special": false,
+	"on-click": "activate ",
+	"on-scroll-up": "hyprctl dispatch workspace e+1 ",
+	"on-scroll-down": "hyprctl dispatch workspace e-1 ",
+    "persistent-workspaces": {
+      "*": 3
+	},
+		"format-icons": {
+		"1": "Uno ",
+		"2": "Due ",
+		"3": "Tre "
+	}
+  },
+
+//  NUMBERS and ICONS style
+"hyprland/workspaces#4": {
+	"format": "{name} {icon} ",
+	//"format": "{icon} ",
+	"show-special": false,
+	"on-click": "activate ",
+	"on-scroll-up": "hyprctl dispatch workspace e+1 ",
+	"on-scroll-down": "hyprctl dispatch workspace e-1 ",
+	"all-outputs": true,
+	"sort-by-number": true,
+	"format-icons": {
+		"1": " ",
+		"2": " ",
+		"3": " ",
+		"4": " ",
+		"focused": " ",
+		"default": " ",
+	},
+},
+// numbers styles
+"hyprland/workspaces#numbers": {
+	"active-only": false,
+	"all-outputs": true,
+	"format": "{icon} ",
+	"show-special": false,
+	"on-click": "activate ",
+	"on-scroll-up": "hyprctl dispatch workspace e+1 ",
+	"on-scroll-down": "hyprctl dispatch workspace e-1 ",
+    "persistent-workspaces": {
+      "*": 3
+	},
+	"format-icons": {
+		"1": "1 ",
+		"2": "2 ",
+		"3": "3 "
+	},
+},
+// NUMBERS and ICONS style with window rewrite
+"hyprland/workspaces#rw": {
+	"disable-scroll": true,
+	"all-outputs": true,
+	"warp-on-scroll": false,
+	"sort-by-number": true,
+	"show-special": false,
+	"on-click": "$HOME/.local/share/archriot/config/bin/waybar-workspace-click.sh {name} ",
+	"on-scroll-up": "hyprctl dispatch workspace e+1 ",
+	"on-scroll-down": "hyprctl dispatch workspace e-1 ",
+	"persistent-workspaces": {
+		"1": [],
+		"2": [],
+		"3": [],
+		"4": []
+	},
+	"max-length": 4,
+	"active-only": false,
+	"numeric-first": false,
+	"format": "{icon}{windows}",
+	"window-rewrite-delay": 250,
+	"format-icons": {
+		"minimized": "<span font='13'></span> ",
+		"active": "<span font='13'>󰮯</span> ",
+		"default": "<span font='13'>󰊠</span> ",
+		"empty": "<span font='12'>⬤</span> "
+	},
+	"format-window-separator": "",
+	"window-rewrite-default": "<span font='11'> </span>",
+	"ignore-workspaces": [],
+	"window-rewrite": {
+		"title<.*amazon.*>": "<span font='11'>󰊯 </span>",
+
+		"class<firefox|org.mozilla.firefox|librewolf|floorp|mercury-browser|[Cc]achy-browser>": "<span font='11'>󰈹 </span>",
+		"class<signal>": "<span font='11'>󰍡 </span>",
+		"class<com.transmissionbt.transmission.*>": "<span font='11'>󰇚 </span>",
+		// 10 alternative icon suggestions for Fragments (torrent/download app):
+		// 󰇚 󰅐 󰛴 󰉍 󰦖 󰄠 󰶼 󰦤 󰦕 󰛶 󰅐
+		"class<de.haeckerfelix.Fragments>": "<span font='11'>󰇚 </span>",
+		"class<zen>": "<span font='11'>󰰷 </span>",
+		"class<waterfox|waterfox-bin>": "<span font='11'>󰈹 </span>",
+		"class<microsoft-edge>": "<span font='11'>󰇩 </span>",
+		"class<Chromium|Thorium|[Cc]hrome>": "<span font='11'>󰊯 </span>",
+		"class<brave-browser|Brave-browser|Brave|brave>": "<span font='11'>󰊯 </span>",
+		"class<brave-x.com.*>": "<span font='11'>𝕏 </span>",
+		"class<twitter-x>": "<span font='11'>𝕏 </span>",
+		"class<cake_wallet>": "<span font='11'>󰿦 </span>",
+		"class<feather>": "<span font='11'>󱟘 </span>",
+		"class<Trezor Suite>": "<span font='11'>󰌆 </span>",
+		"class<Exodus|exodus>": "<span font='11'>Ⓧ </span>",
+		"class<tor browser>": "<span font='11'> </span>",
+		"class<firefox-developer-edition>": "<span font='11'>󰈹 </span>",
+
+		"class<konsole>": "<span font='11'> </span>",
+		"class<kitty>": "<span font='11'>󰛖 </span>",
+		"class<com.mitchellh.ghostty>": "<span font='11'>󰊠 </span>",
+		"class<com.mitchellh.ghostty-floating>": "<span font='11'>󰊠 </span>",
+		"class<org.wezfurlong.wezterm>": "<span font='11'>󰞷 </span>",
+
+		"class<[Tt]hunderbird|[Tt]hunderbird-esr>": "<span font='11'> </span>",
+		"class<eu.betterbird.Betterbird>": "<span font='11'> </span>",
+		"class<org.gnome.Evolution>": "<span font='11'>󰊫 </span>",
+		"class<claws-mail>": "<span font='11'>󰇮 </span>",
+		"class<org.gnome.Geary>": "<span font='11'>󰊫 </span>",
+		"title<.*gmail.*>": "<span font='11'>󰊫 </span>",
+		"title<.*proton.*mail.*>": "<span font='11'>󰊫 </span>",
+		"class<brave-mail.proton.me.*>": "<span font='11'>󰊫 </span>",
+
+		"class<[Tt]elegram-desktop|org.telegram.desktop|io.github.tdesktop_x64.TDesktop>": "<span font='11'>󰘦 </span>",
+		"class<discord|[Ww]ebcord|Vesktop>": "<span font='11'> </span>",
+		"title<.*whatsapp.*>": "<span font='11'> </span>",
+    "title<.*zapzap.*>": "<span font='11'> </span>",
+		"title<.*messenger.*>": "<span font='11'> </span>",
+		"title<.*facebook.*>": "<span font='11'> </span>",
+		"title<.*reddit.*>": "<span font='11'> </span>",
+		"title<.*bsky.*>": "<span font='11'>󰙱 </span>",
+
+
+		"title<.*ChatGPT.*>": "<span font='11'>󰚩 </span>",
+		"title<.*deepseek.*>": "<span font='11'>󰚩 </span>",
+		"title<.*qwen.*>": "<span font='11'>󰚩 </span>",
+		"class<subl>": "<span font='11'>󰅳 </span>",
+		"class<slack>": "<span font='11'> </span>",
+
+		"class<mpv>": "<span font='11'> </span>",
+		"class<celluloid>": "<span font='11'> </span>",
+		"class<Zoom>": "<span font='11'>󰕧 </span>",
+		"class<Cider>": "<span font='11'>󰎆 </span>",
+		"title<.*Picture-in-Picture.*>": "<span font='11'> </span>",
+		"title<.*youtube.*>": "<span font='11'> </span>",
+		"class<vlc>": "<span font='11'>󰕼 </span>",
+		"title<.*cmus.*>": "<span font='11'>󰽴 </span>",
+		"class<[Ss]potify>": "<span font='11'>󰽴 </span>",
+		"class<org.kde.elisa>": "<span font='11'>󰽴 </span>",
+		"class<org.gnome.Lollypop>": "<span font='11'>󰝚 </span>",
+		"class<org.gnome.Music>": "<span font='11'>󰝚 </span>",
+		"class<org.gnome.music>": "<span font='11'>󰝚 </span>",
+		"class<rhythmbox>": "<span font='11'>󰝚 </span>",
+
+		"class<virt-manager>": "<span font='11'> </span>",
+		"class<.virt-manager-wrapped>": "<span font='11'> </span>",
+		"class<virtualbox manager>": "<span font='11'>󰌗 </span>",
+		"title<virtualbox>": "<span font='11'>󰌗 </span>",
+		"class<remmina>": "<span font='11'>󰢹 </span>",
+
+"class<VSCode|code-url-handler|code-oss|codium|codium-url-handler|VSCodium>": "<span font='11'>󰨞 </span>",
+		// 10 alternative icon suggestions for Zed:
+		// ⚡ 󰓕 󰆼 󰘦 󰤌 󰝤 󰩃 󰢩 󰊄 󰂺 ☡ ≡
+		"class<dev.zed.Zed|dev.zed.Zed-Preview>": "<span font='12'>≡ </span>",
+        "class<codeblocks>": "<span font='11'>󰅩 </span>",
+        "class<geany>": "<span font='11'>󰈙 </span>",
+		"title<.*github.*>": "<span font='11'> </span>",
+		"class<mousepad>": "<span font='11'> </span>",
+		"class<libreoffice-writer>": "<span font='11'>󰈙 </span>",
+		"class<libreoffice-startcenter>": "<span font='11'>󰏆 </span>",
+		"class<libreoffice-calc>": "<span font='11'>󰈙 </span>",
+		"title<.*nvim ~.*>": "<span font='11'>󰈙 </span>",
+		"title<.*vim.*>": "<span font='11'>󰈙 </span>",
+		"title<.*nvim.*>": "<span font='11'>󰈙 </span>",
+		"title<.*figma.*>": "<span font='11'>󰈙 </span>",
+		"title<.*jira.*>": "<span font='11'>󰈙 </span>",
+		"class<jetbrains-idea>": "<span font='11'> </span>",
+
+		"class<obs|com.obsproject.Studio>": "<span font='11'> </span>",
+
+		"class<polkit-gnome-authentication-agent-1>": "<span font='11'>󰒃 </span>",
+		"class<nwg-look>": "<span font='11'> </span>",
+		"class<[Pp]avucontrol|org.pulseaudio.pavucontrol>": "<span font='11'>󱡫 </span>",
+		"class<steam>": "<span font='11'> </span>",
+		"class<thunar|nemo>": "<span font='11'>󰝰 </span>",
+    "class<Gparted>":"<span font='11'> </span>",
+		"class<gimp>": "<span font='11'> </span>",
+		"class<emulator>": "<span font='11'>󰄭 </span>",
+		"class<android-studio>": "<span font='11'> </span>",
+   	"class<org.pipewire.Helvum>": "<span font='11'>󰓃 </span>",
+
+    "class<PrusaSlicer|UltiMaker-Cura|OrcaSlicer>": "<span font='11'>󰹛 </span>",
+		"class<ghostwriter|org.kde.ghostwriter>": "<span font='11'>󰷈 </span>",
+		"class<org.gnome.TextEditor>": "<span font='11'>󰷈 </span>",
+		"class<org.gnome.Papers>": "<span font='11'>󰈦 </span>",
+		"class<org.gnome.Nautilus|nautilus>": "<span font='11'>󰝰 </span>",
+		"class<org.gnome.Contacts>": "<span font='11'>󰀉 </span>",
+    "class<org.pwmt.zathura>": "<span font='11'>󰈦 </span>"
+		}
+	},
+}

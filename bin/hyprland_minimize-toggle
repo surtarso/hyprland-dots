@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+#
+# Hyprland minimize hack using a hidden workspace
+# -------------------------------------------------
+# Ctrl + Esc   → minimize focused window (send to "minimized")
+# Shift + Esc → restore most recently minimized window
+#
+# Requirements: jq
+#
+# Usage: ()
+# Minimize (send to hidden workspace)
+# bind = CTRL, ESCAPE, exec, path/to/minimize-toggle.sh
+# Restore last minimized window to current workspace
+# bind = SHIFT, ESCAPE, exec, path/to/minimize-toggle.sh restore
+
+HIDDEN_WS="minimized"
+STATE_FILE="$XDG_RUNTIME_DIR/hypr-minimized-list"
+mkdir -p "$(dirname "$STATE_FILE")"
+
+# Get focused window address and current workspace
+focused_addr=$(hyprctl activewindow -j | jq -r '.address // empty')
+focused_ws=$(hyprctl activeworkspace -j | jq -r '.name // empty')
+
+if [ "$1" = "restore" ]; then
+    # Restore most recently minimized window
+    if [ -f "$STATE_FILE" ] && [ -s "$STATE_FILE" ]; then
+        # Grab last entry and remove it from list
+        last_addr=$(tail -n 1 "$STATE_FILE")
+        sed -i '$d' "$STATE_FILE"
+        if [ -n "$last_addr" ]; then
+            hyprctl dispatch movetoworkspacesilent name:$focused_ws,address:$last_addr
+        fi
+    fi
+    exit 0
+fi
+
+# If no focused window, do nothing
+[ -z "$focused_addr" ] && exit 0
+
+# Minimize (move to hidden workspace)
+hyprctl dispatch movetoworkspacesilent name:$HIDDEN_WS,address:$focused_addr
+
+# Save it to restore list
+echo "$focused_addr" >> "$STATE_FILE"
