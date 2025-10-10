@@ -19,7 +19,5 @@ Includes:
 - workspace configuration
 - windows rules (merged)
 - hyprwv plugins configuration
-- fish aliases
-- ssh-agent
 - sway-bg script to sync wallapaper+lockscreen+grub
 - custom minimize actions script for hyprland
