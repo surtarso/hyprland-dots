@@ -153,7 +153,7 @@
 	"format": "{icon}{windows}",
 	"window-rewrite-delay": 250,
 	"format-icons": {
-		"minimized": "<span font='13'></span> ",
+		"minimized": "<span font='13'> </span> ",
 		"active": "<span font='13'>󰮯</span> ",
 		"default": "<span font='13'>󰊠</span> ",
 		"empty": "<span font='12'>⬤</span> "
