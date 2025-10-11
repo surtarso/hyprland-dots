@@ -2,8 +2,8 @@ fish_add_path --prepend $HOME/bin
 
 #general
 alias l='lsd -l'
-alias ll='lsd -lA'
-alias la='lsd -la'
+alias ll='lsd -la'
+alias la='lsd -a'
 alias lazyupdate='yay -Syu && yay -Yc && sudo paccache -r'
 
 #vpn
@@ -31,6 +31,3 @@ alias @minecraft='ssh root@192.168.15.226'
 alias @dashboards='ssh dash@192.168.15.227'
 alias @emulatorjs='ssh root@192.168.15.228'
 alias @openvpn='ssh root@192.168.15.229'
-
-alias apu-run='DRI_PRIME=1 '
-alias gpu-run='DRI_PRIME=0 '
