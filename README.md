@@ -10,8 +10,8 @@ Includes:
 - waybar style and app icons
 <img width="218" height="52" alt="image" src="https://github.com/user-attachments/assets/659be402-fd89-42bc-83d4-ae1062a68c43" />
 
-- cava bars script
-- waybar mini cava bar module
+- cava bars script for stereo
+- waybar mini cava bar modules left/right
 <img width="555" height="52" alt="image" src="https://github.com/user-attachments/assets/a5fd8f1b-1228-4319-aa3c-4746343bf76e" />
   
 - keybindings
@@ -21,3 +21,4 @@ Includes:
 - hyprwv plugins configuration
 - sway-bg script to sync wallapaper+lockscreen+grub
 - custom minimize actions script for hyprland
+- custom minimized workspace rules and style
