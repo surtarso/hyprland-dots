@@ -1,0 +1,99 @@
+#!/bin/bash
+# generate_keybindings_help - Simple 2-column HTML help page from Hyprland keybindings
+# Tarso Galvão Sat Oct 11 10:56:11 PM -03 2025
+
+CONFIG_FILE="$HOME/.config/hypr/keybindings.conf"
+OUTPUT_FILE="$HOME/help.html"
+
+# Ensure config exists
+if [[ ! -f "$CONFIG_FILE" ]]; then
+    echo "File not found: $CONFIG_FILE"
+    exit 1
+fi
+
+# Write HTML header
+cat > "$OUTPUT_FILE" <<'EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Keybind Mapping</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+    font-family: monospace;
+    background: #111;
+    color: #eee;
+    margin: 0;
+    padding: 1em;
+}
+h1 {
+    text-align: center;
+    color: #00e0ff;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em auto;
+    max-width: 600px;
+}
+th, td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #333;
+}
+th {
+    background: #222;
+    color: #0ff;
+}
+tr:hover {
+    background: #222;
+}
+.desc {
+    color: #aaa;
+}
+</style>
+</head>
+<body>
+<h1>Keybind Mapping</h1>
+<table>
+<thead><tr><th>Bind</th><th>Description</th></tr></thead>
+<tbody>
+EOF
+
+# Parse lines starting with 'bind' that have an inline comment
+grep -E '^bind' "$CONFIG_FILE" | while IFS= read -r line; do
+    [[ "$line" != *"#"* ]] && continue
+
+    # Extract description (after '#')
+    desc="${line#*#}"
+    desc=$(echo "$desc" | xargs)
+
+    # Extract everything between 'bind =' and the second comma
+    bind_keys=$(echo "$line" | sed -E 's/^bind *= *([^,]+,[^,]+).*/\1/' | xargs)
+
+    # Handle case with no modifier (like "bind = , KEY, ...")
+    if [[ "$bind_keys" =~ ^, ]]; then
+        # Remove leading comma and spaces if there’s no modifier
+        bind_keys=$(echo "$bind_keys" | sed -E 's/^, *//')
+    fi
+
+    # Replace commas with ' + ' for nicer formatting
+    bind_keys=$(echo "$bind_keys" | sed 's/,/ + /g')
+
+    # Write table row
+    echo "<tr><td>${bind_keys}</td><td class=\"desc\">${desc}</td></tr>" >> "$OUTPUT_FILE"
+done
+
+# Close HTML
+cat >> "$OUTPUT_FILE" <<'EOF'
+</tbody>
+</table>
+</body>
+</html>
+EOF
+
+echo "Help page generated: $(realpath "$OUTPUT_FILE")"
+
+# uncomment this line if you want to bind this script to the help panel
+# so a fresh list is created every time (will add a minor delay)
+# xdg-open "$OUTPUT_FILE" >/dev/null 2>&1 &

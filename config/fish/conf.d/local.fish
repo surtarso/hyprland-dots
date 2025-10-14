@@ -14,11 +14,11 @@ alias @vps-urcadefiles='ssh ubuntu@urcade-files.ddns.net'
 alias @website='ssh ubuntu@tarsogalvao.ddns.net'
 
 #pcs [ethernet]
-alias @marcela='ssh -X msperandio@192.168.15.201'
-alias @urcade='ssh -X urcade@192.168.15.202'
+alias @marcela='ssh msperandio@192.168.15.201'
+alias @urcade='ssh urcade@192.168.15.202'
 
 #pcs [wifi]
-alias @tarsotop='ssh -X tarso@192.168.15.100'
+alias @tarsotop='ssh tarso@192.168.15.100'
 
 #vms [.220 - .229]
 alias @dom0='ssh root@192.168.15.220'

@@ -190,7 +190,7 @@
 
 "hyprland/window": {
 	"format": "{}",
-	"max-length": 55,
+	"max-length": 35,
 	"separate-outputs": true,
 	"offscreen-css": true,
 	"offscreen-css-text": "(inactive)",
@@ -239,14 +239,17 @@
 	"tooltip": true,
 	"tooltip-format": "{status_icon} {dynamic}\nLeft Click: previous\nMid Click: Pause\nRight Click: Next",
 	"player-icons": {
-		"chromium": "",
-		"default": "",
-		"firefox": "",
-		"kdeconnect": "",
+		"chromium": "",
+		"chrome": "",
+		"brave": "",
+		"default": "",
+		"firefox": "",
+		"kdeconnect": "",
 		"mopidy": "",
 		"mpv": "󰐹",
-		"spotify": "",
+		"spotify": "",
 		"vlc": "󰕼",
+		"lollypop": "",
 	},
 	"status-icons": {
 		"paused": "󰐎",
