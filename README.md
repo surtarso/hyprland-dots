@@ -13,12 +13,19 @@ Includes:
 - cava bars script for stereo
 - waybar mini cava bar modules left/right
 <img width="555" height="52" alt="image" src="https://github.com/user-attachments/assets/a5fd8f1b-1228-4319-aa3c-4746343bf76e" />
-  
+
+- custom minimize actions script for hyprland
+- custom minimized workspace rules and style
+<img width="170" height="37" alt="image" src="https://github.com/user-attachments/assets/0165300a-5502-44e8-ac8d-ca87c183bb60" />
+
 - keybindings
+- script to generate keybindings help panel
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/43a9c9c2-a3a8-44d1-beb8-16a0bb09819b" />
+
 - monitor configuration
 - workspace configuration
 - windows rules (merged)
 - hyprwv plugins configuration
 - sway-bg script to sync wallapaper+lockscreen+grub
-- custom minimize actions script for hyprland
-- custom minimized workspace rules and style
+
+
