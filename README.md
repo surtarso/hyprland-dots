@@ -20,7 +20,8 @@ Includes:
 
 - keybindings
 - script to generate keybindings help panel
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/43a9c9c2-a3a8-44d1-beb8-16a0bb09819b" />
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/76361435-e7fc-4705-be93-0e09e06b04f7" />
+
 
 - monitor configuration
 - workspace configuration
