@@ -4,6 +4,9 @@
 
 CONFIG_FILE="$HOME/.config/hypr/keybindings.conf"
 OUTPUT_FILE="$HOME/help.html"
+# change to "Super", "", "󰣇", "Win" or w.e.
+# see what works in your browser.
+MOD_SYMBOL="⌘"
 
 # Ensure config exists
 if [[ ! -f "$CONFIG_FILE" ]]; then
@@ -79,6 +82,9 @@ grep -E '^bind' "$CONFIG_FILE" | while IFS= read -r line; do
 
     # Replace commas with ' + ' for nicer formatting
     bind_keys=$(echo "$bind_keys" | sed 's/,/ + /g')
+
+    # Substitute $mod variable (if present)
+    bind_keys=$(echo "$bind_keys" | sed "s/\\\$mod/${MOD_SYMBOL}/g")
 
     # Write table row
     echo "<tr><td>${bind_keys}</td><td class=\"desc\">${desc}</td></tr>" >> "$OUTPUT_FILE"
