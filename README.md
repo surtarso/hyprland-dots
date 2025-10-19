@@ -30,7 +30,7 @@ Includes:
 - sway-bg script to sync wallapaper+lockscreen+grub
 - RMPC configuration and theme
 - cava socat passthru services for mpd
-<img width="895" height="444" alt="image" src="https://github.com/user-attachments/assets/5968b9d8-e670-44d2-b839-ae1e3d7605dc" />
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/5968b9d8-e670-44d2-b839-ae1e3d7605dc" />
 
 
 
