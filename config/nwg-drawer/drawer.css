@@ -4,7 +4,7 @@
 window {
     background-color: rgba(0, 0, 0, 0); /* fully transparent */
     color: #e0e0ff;
-    padding: 10px;
+    padding: 5px;
     border: none;
     box-shadow: 0 0 30px rgba(50, 100, 255, 0.2);
     outline: none;
@@ -12,8 +12,8 @@ window {
 
 #drawer-box {
     background-color: rgba(20, 20, 40, 0.25); /* semi-transparent panel */
-    border-radius: 20px;
-    padding: 10px;
+    border-radius: 2px;
+    padding: 1px;
     box-shadow: 0 0 20px rgba(50, 100, 255, 0.2);
 }
 
@@ -50,24 +50,21 @@ button:hover {
     text-shadow: 0 0 10px #8be9fd;
 }
 
-/* Category buttons: floating neon style */
+/* Category buttons: floating neon style (shorter version) */
 #category-button {
-    margin: 0 8px;
-    padding: 6px 12px;
-    border-radius: 10px;
-    background-color: rgba(50, 50, 90, 0.5);
-    border: 1px solid rgba(120, 80, 200, 0.5);
-    color: #bd93f9;
+    margin: 3px 3px;
+    padding: 2px 4px;
+    border-radius: 6px;
+    background-color: rgba(50, 50, 80, 0.6);
 }
 
 #category-button:hover {
-    background-color: rgba(120, 80, 200, 0.3);
-    box-shadow: 0 0 8px rgba(189, 147, 249, 0.6);
+    background-color: rgba(120, 80, 200, 0.5);
 }
 
 /* Pinned files box: floating panel with soft border */
 #pinned-box {
-    padding: 6px;
+    padding: 3px;
     border-bottom: 1px dotted rgba(200, 200, 255, 0.3);
     border-radius: 15px;
     margin-bottom: 10px;
@@ -75,11 +72,11 @@ button:hover {
 
 /* Files box: frosted container with glow */
 #files-box {
-    padding: 10px;
+    padding: 5px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: rgba(20, 20, 40, 0.4);
-    box-shadow: 0 0 20px rgba(50, 100, 255, 0.2);
+    box-shadow: 0 0 10px rgba(50, 100, 255, 0.2);
 }
 
 /* Math label: neon green pop */
@@ -95,17 +92,21 @@ button:hover {
 /* Scrollbars (if any) */
 scrollbar {
     background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 scrollbar slider {
     background-color: rgba(120, 80, 200, 0.6);
-    border-radius: 10px;
-    min-height: 20px;
+    border-radius: 5px;
+    min-height: 10px;
 }
 
 /* Neon glow hover effect for all interactive widgets */
 *:hover {
     transition: all 0.15s ease-in-out;
-    box-shadow: 0 0 15px rgba(100, 200, 255, 0.5);
+    box-shadow: 0 0 10px rgba(100, 200, 255, 0.5);
 }
+
+
+
+
