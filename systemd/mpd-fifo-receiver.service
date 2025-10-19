@@ -1,0 +1,15 @@
+[Unit]
+Description=MPD FIFO Receiver (socat TCP client)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStartPre=/bin/rm -f /tmp/server_mpd.fifo
+ExecStart=/usr/bin/socat -u TCP:media.server.lan:5555 CREATE:/tmp/server_mpd.fifo
+Restart=always
+RestartSec=2
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

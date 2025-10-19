@@ -1,0 +1,14 @@
+[Unit]
+Description=MPD FIFO Broadcast (socat TCP stream)
+After=mpd.service
+Requires=mpd.service
+
+[Service]
+ExecStart=/usr/bin/socat -u FILE:/srv/mpd-share/server_mpd.fifo TCP-LISTEN:5555,reuseaddr
+Restart=always
+RestartSec=2
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
