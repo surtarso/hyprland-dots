@@ -19,7 +19,7 @@ Includes:
 <img width="170" height="37" alt="image" src="https://github.com/user-attachments/assets/0165300a-5502-44e8-ac8d-ca87c183bb60" />
 
 - keybindings
-- script to generate keybindings help panel
+- script to generate searchable keybindings help panel
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/76361435-e7fc-4705-be93-0e09e06b04f7" />
 
 
@@ -29,9 +29,9 @@ Includes:
 - hyprwv plugins configuration
 - sway-bg script to sync wallapaper+lockscreen+grub
 - RMPC configuration and theme
-- cava socat passthru services for mpd
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/5968b9d8-e670-44d2-b839-ae1e3d7605dc" />
 
+- cava socat passthru services for mpd
 
 
 
