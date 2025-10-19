@@ -29,7 +29,10 @@ Includes:
 - hyprwv plugins configuration
 - sway-bg script to sync wallapaper+lockscreen+grub
 - RMPC configuration and theme
-<img width="894" height="444" alt="image" src="https://github.com/user-attachments/assets/b7046d8f-4300-43f1-a368-6de2a9fb097b" />
+- cava socat passthru services for mpd
+<img width="895" height="444" alt="image" src="https://github.com/user-attachments/assets/5968b9d8-e670-44d2-b839-ae1e3d7605dc" />
+
+
 
 
 
