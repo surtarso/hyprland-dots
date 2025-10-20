@@ -16,7 +16,7 @@ APPS_LIST=(
     "brave --app="https://bsky.app"|2|HDMI-A-3"
     "brave --app="http://dash.server.lan"|3|HDMI-A-1"
     "brave --app="https://web.whatsapp.com"|4|DP-1"
-    "ghostty|ghostty --class=com.mitchellh.ghostty-floating|4|DP-1"
+    "ghostty --class=com.mitchellh.ghostty-floating|4|DP-1"
 )
 
 # Main loop (timming is critical, too fast wont work)
