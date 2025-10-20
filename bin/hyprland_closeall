@@ -1,0 +1,76 @@
+#!/bin/bash
+# ----------------- hyprland_closeall -------------------
+# Intelligently closes all windows
+# Sends 'q' to active terminal running apps, closes idle ones.
+# Requires: jq, wtype
+# Bind example: bind = CTRL ALT, backspace, exec, $HOME/bin/hyprland_closeall
+# --------------------------------------------------------
+# Tarso Galvão - Mon Oct 20 10:28:49 AM -03 2025
+
+SELF_PID=$$
+TERMINAL_CLASSES="(?i)^(kitty|alacritty|foot|wezterm|konsole|gnome-terminal|ghostty|tilix|terminator|xfce4-terminal|lxterminal|mate-terminal|xterm|urxvt|st|tilda|guake|yakuake|hyper)$"
+
+# === Get list of clients ===
+CLIENTS=$(hyprctl clients -j)
+if [ -z "$CLIENTS" ] || [ "$CLIENTS" = "[]" ]; then
+    echo "No open windows found."
+    exit 0
+fi
+
+# === Helper: check if terminal has running child process ===
+is_terminal_busy() {
+    local pid="$1"
+    # /proc/<pid>/task/<pid>/children lists child PIDs of the main shell process
+    if [ -s "/proc/$pid/task/$pid/children" ]; then
+        return 0  # busy (something is running)
+    else
+        return 1  # idle (no children)
+    fi
+}
+
+# === Loop through each window ===
+echo "$CLIENTS" | jq -r '.[] | "\(.address) \(.pid) \(.class)"' | while read -r ADDR PID CLASS; do
+    [ -z "$PID" ] && continue
+    [ "$PID" -le 1 ] && continue
+
+    # Skip self and Hyprland
+    if [ "$PID" -eq "$SELF_PID" ]; then
+        continue
+    fi
+    if ps -p "$PID" -o comm= | grep -q "^Hyprland$"; then
+        continue
+    fi
+
+    # === Handle terminal windows ===
+   if [[ "$CLASS" =~ $TERMINAL_CLASSES ]]; then
+        if is_terminal_busy "$PID"; then
+            echo "Terminal ($CLASS, PID $PID) is running an app → sending 'q'"
+            hyprctl dispatch focuswindow address:"$ADDR"
+            wtype q
+            sleep 0.2
+            wtype q
+            sleep 0.2
+        else
+            echo "Terminal ($CLASS, PID $PID) is idle → closing window"
+            hyprctl dispatch closewindow address:"$ADDR"
+            sleep 0.2
+        fi
+        continue
+    fi
+
+    # === Handle non-terminal windows ===
+    echo "Closing window ($CLASS, PID $PID)..."
+    hyprctl dispatch closewindow address:"$ADDR"
+    sleep 0.1
+done
+
+# === Kill any leftover processes ===
+echo "$CLIENTS" | jq -r '.[].pid' | while read -r PID; do
+    if ps -p "$PID" > /dev/null && [ "$PID" -ne "$SELF_PID" ]; then
+        kill -9 "$PID"
+        echo "Force killed lingering PID: $PID"
+    fi
+done
+
+notify-send "Hyprland CloseAll" "All windows are closed."
+echo "All windows closed cleanly."

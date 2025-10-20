@@ -23,16 +23,20 @@ cat > "$OUTPUT_FILE" <<'EOF'
 <title>Keybind Mapping</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body {
+html, body {
     font-family: monospace;
     background: #111;
     color: #eee;
     margin: 0;
     padding: 1em;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 h1 {
     text-align: center;
     color: #00e0ff;
+    padding: 0;
 }
 table {
     width: 100%;
