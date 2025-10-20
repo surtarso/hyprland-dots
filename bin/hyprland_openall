@@ -6,39 +6,22 @@
 # Bind example: bind = $mod, backspace, exec, $HOME/bin/hyprland_openall
 # --------------------------------------------------------
 # Tarso Galvão - Mon Oct 20 2025
-sleep 0.2
 
 # === CONFIG ===
-# Format: "class|command|workspace|monitor|(optional)title"
-# Class (WM_CLASS) is the app class as shown in `hyprctl clients -j`
+# Format: "command|workspace|monitor"
 # Monitor can be name or ID as shown in `hyprctl monitors`
 APPS_LIST=(
-    "kitty|kitty --title clock-rs -o font_size=18 -o background_opacity=0.0 -e --class clock-rs clock-rs -c bright-blue|1|DVI-D-1|clock-rs"
-    "kitty|kitty --title rmpc -e --class mpd-player rmpc|2|HDMI-A-3|rmpc"
-    "brave|brave --app="https://bsky.app"|2|HDMI-A-3|"
-    "brave|brave --app="http://dash.server.lan"|3|HDMI-A-1|"
-    "brave|brave --app="https://web.whatsapp.com"|4|DP-1|"
-    "ghostty|ghostty --class=com.mitchellh.ghostty-floating|4|DP-1|"
+    "kitty --title clock-rs -o font_size=18 -o background_opacity=0.0 -e --class clock-rs clock-rs -c bright-blue|1|DVI-D-1"
+    "kitty --title rmpc -e --class mpd-player rmpc|2|HDMI-A-3"
+    "brave --app="https://bsky.app"|2|HDMI-A-3"
+    "brave --app="http://dash.server.lan"|3|HDMI-A-1"
+    "brave --app="https://web.whatsapp.com"|4|DP-1"
+    "ghostty|ghostty --class=com.mitchellh.ghostty-floating|4|DP-1"
 )
 
-open_app() {
-    local class="$1"
-    local command="$2"
-    local workspace="$3"
-    local monitor="$4"
-
-    echo "Opening $class → workspace $workspace on $monitor"
-    hyprctl dispatch workspace "$workspace"
-    hyprctl dispatch focusmonitor "$monitor"
-    eval "$command" & disown
-    sleep 0.5
-}
-
-# Main loop
+# Main loop (timming is critical, too fast wont work)
 for APP in "${APPS_LIST[@]}"; do
-    IFS="|" read -r CLASS CMD WS MON TITLE <<< "$APP"
-    echo "Launching: $CLASS $TITLE → workspace $WS on $MON"
-
+    IFS="|" read -r CMD WS MON <<< "$APP"
     hyprctl dispatch focusmonitor "$MON"
     hyprctl dispatch workspace "$WS"
     sleep 0.2
@@ -46,9 +29,9 @@ for APP in "${APPS_LIST[@]}"; do
     sleep 0.6
 done
 
-# End focus/mouse in preferred monitor/workspace
+# End focus/pointer in preferred workspace monitor
 hyprctl dispatch focusmonitor HDMI-A-1
 hyprctl dispatch workspace 3
 
-notify-send "Hyprland OpenAll" "All configured apps have been opened."
+notify-send "Hyprland OpenAll" "Launched all configured apps."
 echo "All configured apps have been launched."
