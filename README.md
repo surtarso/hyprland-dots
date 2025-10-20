@@ -32,6 +32,9 @@ Includes:
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/5968b9d8-e670-44d2-b839-ae1e3d7605dc" />
 
 - cava socat passthru services for mpd
+- modified dropterminal script for multimonitor support
+- custom "close all" action script to close all windows on all workspaces
+- custom "open all" action script to open a set of windows on specific places at once
 
 
 
