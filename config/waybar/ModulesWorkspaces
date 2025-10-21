@@ -202,6 +202,8 @@
 		"class<org.gnome.Geary>": "<span font='11'>󰊫 </span>",
 
 		// --- DEV TOOLS ---
+		// 10 alternative icon suggestions for Zed:
+		// ⚡ 󰓕 󰆼 󰘦 󰤌 󰝤 󰩃 󰢩 󰊄 󰂺 ☡ ≡
 		"class<VSCode|code-url-handler|code-oss|codium|codium-url-handler|VSCodium>": "<span font='11'>󰨞 </span>",
 		"class<dev.zed.Zed|dev.zed.Zed-Preview>": "<span font='12'>☡ </span>",
 		"class<codeblocks>": "<span font='11'>󰘦 </span>",
@@ -270,6 +272,8 @@
 		"class<blender>": "<span font='11'>󰂫 </span>",
 
 		// --- UTILITIES / MISC ---
+		// 10 alternative icon suggestions for Fragments (torrent/download app):
+		// 󰇚 󰅐 󰛴 󰉍 󰦖 󰄠 󰶼 󰦤 󰦕 󰛶 󰅐
 		"class<feather>": "<span font='11'>󱟘 </span>",
 		"class<Trezor Suite>": "<span font='11'>󰌆 </span>",
 		"class<Exodus|exodus>": "<span font='11'>Ⓧ </span>",
