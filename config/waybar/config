@@ -1,47 +1,98 @@
-{
-    "include": [
-        "$HOME/.config/waybar/Modules", "$HOME/.config/waybar/ModulesWorkspaces", "$HOME/.config/waybar/ModulesCustom",
-        "$HOME/.config/waybar/ModulesGroups", "$HOME/.config/waybar/UserModules"
-    ],
-    "fixed-center": true,
-    "output": ["HDMI-A-1"],
-    //RIGHT
-    "modules-right": [
-        "tray", "custom/separator#blank", "group/system-metrics", "custom/archriot-update",
-        "custom/volume-bar", "network", "clock"
-    ],
-    // CENTER
-    "modules-center": ["custom/cava_left", "mpris", "custom/cava_right"],
-    "layer": "top",
-    "margin-right": 8,
-    // LEFT
-    "modules-left": [
-        //"custom/arch", "custom/separator#blank",
-        "hyprland/workspaces#rw", "custom/separator#blank", "hyprland/window"
-    ],
-    "margin-left": 8,
-    "spacing": 10,
-    "passthrough": false,
-    "exclusive": true,
-    "margin-top": 3,
-    "position": "top",
-    "ipc": false,
+[
+    // ===== Landscape Center (HDMI-A-1)
+    {
+        "include": [
+            "$HOME/.config/waybar/Modules",
+            "$HOME/.config/waybar/ModulesWorkspaces",
+            "$HOME/.config/waybar/ModulesCustom",
+            "$HOME/.config/waybar/ModulesGroups",
+            "$HOME/.config/waybar/UserWorkspaces",
+            "$HOME/.config/waybar/UserModules"
+        ],
 
-    // CypherRiot theme specific overrides
-    "custom/arch": {
-        "format": "󰣇",
-        "on-click": "nwg-drawer -c 4 -is 48 -spacing 15 -fm \"Noto Sans\" || fuzzel",
-        "on-click-right": "pkill fuzzel || fuzzel",
-        "tooltip": true,
-        "tooltip-format": "Left-click: App Drawer | Right-click: Fuzzel"
+        // ----- WAYBAR SETTINGS:
+        "output": ["HDMI-A-1"],
+        "fixed-center": true,
+        "margin-left": 8,
+        "spacing": 10,
+        "passthrough": false,
+        "exclusive": true,
+        "margin-top": 3,
+        "position": "top",
+        "ipc": false,
+        "layer": "top",
+        "margin-right": 8,
+
+        // ----- LEFT
+        "modules-left": [
+            "hyprland/workspaces#pacman-rwc",
+        ],
+
+        // ----- CENTER
+        "modules-center": [
+            "hyprland/window"
+        ],
+        
+        // ----- RIGHT
+        "modules-right": [
+            "tray",
+            "custom/separator#blank",
+            "custom/archriot-update",
+            "clock"
+        ]
     },
-    // CUSTOM OVERRIDES
-    "custom/cava_left": {
-        "format": "{}",
-        "exec": "~/bin/waybar_cava.sh --left"
+
+    // ===== Portrait Right (DP-1)
+    {   // Bottom bar
+        "include": [
+            "$HOME/.config/waybar/ModulesCustom",
+            "$HOME/.config/waybar/Modules",
+            "$HOME/.config/waybar/ModulesGroups"
+        ],
+        
+        "output": ["DP-1"],
+        "margin-bottom": 3,
+        "position": "bottom",
+        "margin-left": 8,
+        "margin-right": 8,
+
+        "modules-left": [
+            "custom/volume-bar"
+        ],
+
+        "modules-center": [
+            "group/system-metrics"
+        ],
+
+        "modules-right": [
+            "network"
+        ]
     },
-    "custom/cava_right": {
-        "format": "{}",
-        "exec": "~/bin/waybar_cava.sh --right"
+
+    // ===== Portrait Left (HDMI-A-3)
+    {   // Bottom bar
+        "include": [
+            "$HOME/.config/waybar/ModulesCustom",
+            "$HOME/.config/waybar/Modules"
+        ],
+        
+        "output": ["HDMI-A-3"],
+        "margin-bottom": 3,
+        "position": "bottom",
+        
+        "modules-center": [
+            "custom/cava_left",
+            "mpris",
+            "custom/cava_right"
+        ],
+        
+        "custom/cava_left": {
+            "format": "{}",
+            "exec": "~/bin/waybar_cava.sh --left"
+        },
+        "custom/cava_right": {
+            "format": "{}",
+            "exec": "~/bin/waybar_cava.sh --right"
+        }
     }
-}
+]
