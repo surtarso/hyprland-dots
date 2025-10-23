@@ -8,7 +8,7 @@ Includes:
 
 
 - waybar style and app icons
-<img width="218" height="52" alt="image" src="https://github.com/user-attachments/assets/659be402-fd89-42bc-83d4-ae1062a68c43" />
+<img width="252" height="26" alt="image" src="https://github.com/user-attachments/assets/635d10b9-3eef-4bdb-bcb1-7886e090c85a" />
 
 - cava bars script for stereo
 - waybar mini cava bar modules left/right
@@ -16,12 +16,11 @@ Includes:
 
 - custom minimize actions script for hyprland
 - custom minimized workspace rules and style
-<img width="170" height="37" alt="image" src="https://github.com/user-attachments/assets/0165300a-5502-44e8-ac8d-ca87c183bb60" />
+<img width="319" height="28" alt="image" src="https://github.com/user-attachments/assets/d5ef1bfe-8b5c-4f6b-a09c-9be4b401b0c0" />
 
 - keybindings
 - script to generate searchable keybindings help panel
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/76361435-e7fc-4705-be93-0e09e06b04f7" />
-
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/9251448b-1f00-4c7c-8525-9496d668ea87" />
 
 - monitor configuration
 - workspace configuration
