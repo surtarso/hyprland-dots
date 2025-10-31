@@ -34,7 +34,6 @@ Includes:
 - modified dropterminal script for multimonitor support
 - custom "close all" action script to close all windows on all workspaces
 - custom "open all" action script to open a set of windows on specific places at once
+- fuzzel "kill menu" to fuzzy search PIDs by name
 
-
-
-
+https://github.com/user-attachments/assets/1ee425f1-36ab-4c50-aece-e35c8220694e
