@@ -13,6 +13,7 @@ TERMINAL_CLASSES="(?i)^(kitty|alacritty|foot|wezterm|konsole|gnome-terminal|ghos
 # === Get list of clients ===
 CLIENTS=$(hyprctl clients -j)
 if [ -z "$CLIENTS" ] || [ "$CLIENTS" = "[]" ]; then
+    notify-send "No windows to close."
     echo "No open windows found."
     exit 0
 fi
@@ -72,5 +73,5 @@ echo "$CLIENTS" | jq -r '.[].pid' | while read -r PID; do
     fi
 done
 
-notify-send "Hyprland CloseAll" "All windows are closed."
+notify-send "All windows are closed."
 echo "All windows closed cleanly."

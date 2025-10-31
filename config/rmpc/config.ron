@@ -2,9 +2,9 @@
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
 (
-    address: "192.168.15.224:6600",
+    address: "media.server.lan:6600",
     password: None,
-    theme: Some("midnight"),
+    theme: Some("ArchRiot"),
     cache_dir: None,
     on_song_change: None,
     volume_step: 5,

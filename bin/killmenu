@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# killmenu - fuzzy find and kill process with fuzzel dmenu
+# Tarso Galvão - Fri Oct 31 09:24:23 AM -03 2025
+
+# Get PID, USER, CMD, CPU%, and MEM in MB/GB [sorts by mem, for cpu use `--sort=-%cpu`]
+# Skip this script itself
+process_list=$(ps -eo pid,user,comm,%cpu,rss --sort=-rss --no-headers \
+    | awk '{
+        mem=$5/1024;
+        unit="MB";
+        if(mem>=1024){mem/=1024; unit="GB"}
+        printf "%-8s %-10s %-20s %5s%% %6.1f%s\n", $1, $2, $3, $4, mem, unit
+    }' \
+    | grep -v "killmenu")
+
+# Pipe list into fuzzel dmenu
+selection=$(echo "$process_list" | fuzzel --dmenu --prompt "Kill > " --match-mode=fzf --width=60)
+
+# Exit if nothing selected
+[ -z "$selection" ] && exit 0
+
+# Extract PID (first column)
+pid=$(awk '{print $1}' <<< "$selection")
+
+# Confirm kill
+if [ -n "$pid" ]; then
+    confirm=$(printf "No\nYes" | fuzzel --dmenu \
+        --prompt "Kill PID $pid? " \
+        --lines=2 \
+        --width=20 \
+        --x-margin=0 \
+        --y-margin=0 \
+        --inner-pad=0)
+
+    if [ "$confirm" = "Yes" ]; then
+        # Try graceful kill
+        kill "$pid" 2>/dev/null || true
+        sleep 0.3
+
+        # Check if still alive
+        if ps -p "$pid" &>/dev/null; then
+            force=$(printf "No\nYes" | fuzzel --dmenu \
+                --prompt "Force kill PID $pid (-9)? " \
+                --lines=2 \
+                --width=28 \
+                --x-margin=0 \
+                --y-margin=0 \
+                --inner-pad=0)
+            [ "$force" = "Yes" ] && kill -9 "$pid" 2>/dev/null
+        fi
+    fi
+fi

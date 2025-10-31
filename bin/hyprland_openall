@@ -29,12 +29,12 @@ for APP in "${APPS_LIST[@]}"; do
     hyprctl dispatch workspace "$WS"
     sleep 0.2
     eval "$CMD" & disown
-    sleep 0.6
+    sleep 1
 done
 
-# End focus/pointer in preferred workspace monitor
+# End focus/pointer in preferred workspace monitor (optional)
 hyprctl dispatch focusmonitor HDMI-A-1
 hyprctl dispatch workspace 3
 
-notify-send "Hyprland OpenAll" "Launched all configured apps."
+notify-send "All configured apps have been launched."
 echo "All configured apps have been launched."

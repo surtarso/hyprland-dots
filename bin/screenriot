@@ -1,0 +1,46 @@
+#!/bin/bash
+# A screensaver for hyprland - Opens an app on each monitor/workspace
+# Use hyprland windowrules to make them fullscreen
+# Use pkill -f $TAG to kill them
+# Tarso Galvão - Tue Oct 28 01:51:54 PM -03 2025
+
+echo "Launching screensavers..."
+
+# ===== CONFIG:
+# TAG is needed for window rules and pkill, do not change!
+TAG="screenriot"
+# Format: "command|workspace|monitor"
+# Monitor can be name or ID as shown in `hyprctl monitors`
+APPS_LIST=(
+    "kitty --title ${TAG} -e --class ${TAG} clock-rs -c magenta|1|DVI-D-1"
+    "kitty --title ${TAG} -e --class ${TAG} cmatrix -aC magenta|2|HDMI-A-3"
+    "kitty --title ${TAG} -o font_size=24 -e --class ${TAG} ssh -o StrictHostKeyChecking=no watch.ascii.theater|3|HDMI-A-1"
+    "kitty --title ${TAG} -e --class ${TAG} cmatrix -aC magenta|4|DP-1"
+)
+
+# Main loop (timming is critical, too fast wont work)
+for APP in "${APPS_LIST[@]}"; do
+    IFS="|" read -r CMD WS MON <<< "$APP"
+    hyprctl dispatch focusmonitor "$MON" &>/dev/null
+    hyprctl dispatch workspace "$WS" &>/dev/null
+    sleep 0.3
+    eval "$CMD" & disown
+    sleep 0.6
+done
+
+echo "All terminals have been launched with tag: ${TAG}."
+
+# ----- Recommended window rules:
+# windowrulev2 = float, title:srlauncher
+# windowrulev2 = fullscreen,class:screenriot
+# windowrulev2 = noanim,class:screenriot
+# windowrulev2 = opacity 1.0,class:screenriot
+# -- You need pkill bound to a key if using these:
+# windowrulev2 = nofocus,class:screenriot
+# windowrulev2 = stayfocused,class:screenriot
+
+# ----- Start/Stop screensaver (for debugging)
+# unbind = $mod, X
+# unbind = $mod SHIFT, X
+# bind = $mod, X, exec, pkill -f screenriot
+# bind = $mod SHIFT, X, exec, kitty --title srlauncher --hold -o background_opacity=0.0 -e $HOME/bin/screenriot

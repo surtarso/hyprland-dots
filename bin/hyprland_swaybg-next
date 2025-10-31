@@ -7,7 +7,8 @@ SYNC_LOCKSCREEN_BG=true
 SYNC_GRUB_BG=true
 
 # Paths
-BACKGROUNDS_DIR="$HOME/.local/share/archriot/backgrounds"
+#BACKGROUNDS_DIR="$HOME/.local/share/archriot/backgrounds"
+BACKGROUNDS_DIR="/home/tarso/Pictures/wallpapers"
 CURRENT_BACKGROUND_FILE="$HOME/.config/archriot/.current-background"
 GRUB_BACKGROUND_FILE="/boot/grub/background.jpg"
 HYPRLOCK_CONF="$HOME/.config/hypr/hyprlock.conf"
