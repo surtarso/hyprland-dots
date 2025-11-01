@@ -2,16 +2,29 @@
 # generate_keybindings_help - Simple 2-column HTML help page from Hyprland keybindings
 # Tarso Galvão Sat Oct 11 10:56:11 PM -03 2025
 
-CONFIG_FILE="$HOME/.config/hypr/keybindings.conf"
-OUTPUT_FILE="$HOME/help.html"
-# change to "Super", "", "󰣇", "Win" or w.e.
-# see what works in your browser.
+DEFAULT_FILE="$HOME/.config/hypr/hyprland.conf"
+USER_FILE="$HOME/.config/hypr/keybindings.conf"
+OUTPUT_FILE="$HOME/.cache/archriot/help.html"
 MOD_SYMBOL="⌘"
 
-# Ensure config exists
-if [[ ! -f "$CONFIG_FILE" ]]; then
-    echo "File not found: $CONFIG_FILE"
+# Ensure default config exists
+if [[ ! -f "$DEFAULT_FILE" ]]; then
+    notify-send "Keymap Generator" "hyprland.conf not found, can't continue!"
+    echo "File not found: $DEFAULT_FILE, can't continue."
     exit 1
+fi
+
+# --- Collect user unbinds (if any) ---
+declare -A UNBINDS
+if [[ -f "$USER_FILE" ]]; then
+    while IFS= read -r line; do
+        [[ "$line" =~ ^unbind ]] || continue
+        keypair=$(echo "$line" | sed -E 's/^unbind *= *//;s/ *#.*//' | xargs)
+        [[ "$keypair" =~ ^, ]] && keypair=$(echo "$keypair" | sed -E 's/^, *//')
+        keypair=$(echo "$keypair" | sed 's/,/ + /g')
+        keypair=$(echo "$keypair" | sed "s/\\\$mod/${MOD_SYMBOL}/g")
+        UNBINDS["$keypair"]=1
+    done < "$USER_FILE"
 fi
 
 # Write HTML header
@@ -20,7 +33,7 @@ cat > "$OUTPUT_FILE" <<'EOF'
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Keybind Mapping</title>
+<title>ArchRiot Keybind Mapping</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 html, body {
@@ -61,40 +74,51 @@ tr:hover {
 </style>
 </head>
 <body>
-<h1>Keybind Mapping</h1>
+<h1>ArchRiot Keybind Mapping</h1>
 <table>
 <thead><tr><th>Bind</th><th>Description</th></tr></thead>
 <tbody>
 EOF
 
-# Parse lines starting with 'bind' that have an inline comment
-grep -E '^bind' "$CONFIG_FILE" | while IFS= read -r line; do
-    [[ "$line" != *"#"* ]] && continue
+# --- Parse DEFAULT_FILE ---
+if [[ -f "$DEFAULT_FILE" ]]; then
+    grep -E '^bind' "$DEFAULT_FILE" | while IFS= read -r line; do
+        [[ "$line" != *"#"* ]] && continue
+        desc="${line#*#}"
+        desc=$(echo "$desc" | xargs)
+        bind_keys=$(echo "$line" | sed -E 's/^bind *= *([^,]+,[^,]+).*/\1/' | xargs)
+        if [[ "$bind_keys" =~ ^, ]]; then
+            bind_keys=$(echo "$bind_keys" | sed -E 's/^, *//')
+        fi
+        bind_keys=$(echo "$bind_keys" | sed 's/,/ + /g')
+        bind_keys=$(echo "$bind_keys" | sed "s/\\\$mod/${MOD_SYMBOL}/g")
 
-    # Extract description (after '#')
-    desc="${line#*#}"
-    desc=$(echo "$desc" | xargs)
+        # Skip if this key was unbound by user
+        if [[ -n "${UNBINDS[$bind_keys]}" ]]; then
+            continue
+        fi
 
-    # Extract everything between 'bind =' and the second comma
-    bind_keys=$(echo "$line" | sed -E 's/^bind *= *([^,]+,[^,]+).*/\1/' | xargs)
+        echo "<tr><td>${bind_keys}</td><td class=\"desc\">${desc}</td></tr>" >> "$OUTPUT_FILE"
+    done
+fi
 
-    # Handle case with no modifier (like "bind = , KEY, ...")
-    if [[ "$bind_keys" =~ ^, ]]; then
-        # Remove leading comma and spaces if there’s no modifier
-        bind_keys=$(echo "$bind_keys" | sed -E 's/^, *//')
-    fi
+# --- Parse USER_FILE ---
+if [[ -f "$USER_FILE" ]]; then
+    grep -E '^bind' "$USER_FILE" | while IFS= read -r line; do
+        [[ "$line" != *"#"* ]] && continue
+        desc="${line#*#}"
+        desc=$(echo "$desc" | xargs)
+        bind_keys=$(echo "$line" | sed -E 's/^bind *= *([^,]+,[^,]+).*/\1/' | xargs)
+        if [[ "$bind_keys" =~ ^, ]]; then
+            bind_keys=$(echo "$bind_keys" | sed -E 's/^, *//')
+        fi
+        bind_keys=$(echo "$bind_keys" | sed 's/,/ + /g')
+        bind_keys=$(echo "$bind_keys" | sed "s/\\\$mod/${MOD_SYMBOL}/g")
+        echo "<tr><td>${bind_keys}</td><td class=\"desc\">${desc}</td></tr>" >> "$OUTPUT_FILE"
+    done
+fi
 
-    # Replace commas with ' + ' for nicer formatting
-    bind_keys=$(echo "$bind_keys" | sed 's/,/ + /g')
-
-    # Substitute $mod variable (if present)
-    bind_keys=$(echo "$bind_keys" | sed "s/\\\$mod/${MOD_SYMBOL}/g")
-
-    # Write table row
-    echo "<tr><td>${bind_keys}</td><td class=\"desc\">${desc}</td></tr>" >> "$OUTPUT_FILE"
-done
-
-# Close HTML
+# --- Close HTML ---
 cat >> "$OUTPUT_FILE" <<'EOF'
 </tbody>
 </table>
@@ -102,8 +126,5 @@ cat >> "$OUTPUT_FILE" <<'EOF'
 </html>
 EOF
 
+#notify-send "Keybind Generator" "Keymapping updated."
 echo "Help page generated: $(realpath "$OUTPUT_FILE")"
-
-# uncomment this line if you want to bind this script to the help panel
-# so a fresh list is created every time (will add a minor delay)
-# xdg-open "$OUTPUT_FILE" >/dev/null 2>&1 &
